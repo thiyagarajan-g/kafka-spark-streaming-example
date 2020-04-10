@@ -1,74 +1,91 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.test.beans;
 
 import java.io.Serializable;
 
 public class RecordBean implements Serializable {
-    public enum Types {
-        africa, asia, europe, north_america, oceania, south_america;
-
-        public static Types fromNumeric(int index) {
-            switch (index) {
-                default:
-                    return null;
-                case 0:
-                    return Types.africa;
-                case 1:
-                    return Types.asia;
-                case 2:
-                    return Types.europe;
-                case 3:
-                    return Types.north_america;
-                case 4:
-                    return Types.oceania;
-                case 5:
-                    return Types.south_america;
-            }
-        }
-    }
-
-    private Types type;
-
+    private static String[] commodityNames = new String[]{"coffee", "tea", "pepper", "nutmeg", "sugar", "cocoa"};
+    private static String[] typeNames = new String[]{"africa", "asia", "europe", "north_america", "oceania", "south_america"};
+    private static String[] partitions = new String[]{"sensex", "nifty", "dow", "nasdaq"};
+    private String type;
+    private String commodity;
+    private String partition;
+    private Long ts;
+    private String uuid;
     private float value;
 
+    public static String getTypeName(int index) {
+        return index >= 0 && index <= 5 ? typeNames[index] : "";
+    }
+
+    public static String getCommodity(int index) {
+        return index >= 0 && index <= 5 ? commodityNames[index] : "";
+    }
+
+    public static String getPartition(int index) {
+        return index >= 0 && index <= 3 ? partitions[index] : "";
+    }
+
     public RecordBean() {
-        // default constructor for default instantiate
     }
 
-    public RecordBean(Types type, float value) {
+    public RecordBean(String uuid, Long ts, String type, String commodity, String partition, float value) {
         this.type = type;
+        this.commodity = commodity;
+        this.partition = partition;
         this.value = value;
+        this.uuid = uuid;
+        this.ts = ts;
     }
 
-    public Types getType() {
-        return type;
+    public String getType() {
+        return this.type;
     }
 
-    public void setType(Types type) {
+    public void setType(String type) {
         this.type = type;
     }
 
     public float getValue() {
-        return value;
+        return this.value;
     }
 
     public void setValue(float value) {
         this.value = value;
+    }
+
+    public String getCommodity() {
+        return this.commodity;
+    }
+
+    public void setCommodity(String commodity) {
+        this.commodity = commodity;
+    }
+
+    public String getPartition() {
+        return this.partition;
+    }
+
+    public void setPartition(String partition) {
+        this.partition = partition;
+    }
+
+    public Long getTs() {
+        return this.ts;
+    }
+
+    public void setTs(Long ts) {
+        this.ts = ts;
+    }
+
+    public String getUuid() {
+        return this.uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String toString() {
+        return "RecordBean{type=" + this.type + ", commodity=" + this.commodity + ", partition=" + this.partition + ", ts=" + this.ts + ", uuid='" + this.uuid + '\'' + ", value=" + this.value + '}';
     }
 }

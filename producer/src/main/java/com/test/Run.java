@@ -26,6 +26,7 @@ import com.test.utils.JsonUtils;
 import org.apache.log4j.Logger;
 
 import java.util.Random;
+import java.util.UUID;
 
 public class Run {
     private static final Logger LOGGER = Logger.getLogger(Run.class);
@@ -51,7 +52,7 @@ public class Run {
         while (true) {
             try {
                 record = generate();
-                producer.produce(record.getType().name(), JsonUtils.serialize(record));
+                producer.produce(record.getType(), JsonUtils.serialize(record));
 
                 Thread.sleep(sleep);
             } catch (Throwable t) {
@@ -67,9 +68,12 @@ public class Run {
      */
     private static RecordBean generate() {
         RecordBean data = new RecordBean();
-        data.setType(RecordBean.Types.fromNumeric(RANDOM.nextInt(6)));
+        data.setType(RecordBean.getTypeName(RANDOM.nextInt(6)));
+        data.setCommodity(RecordBean.getCommodity(RANDOM.nextInt(6)));
+        data.setPartition(RecordBean.getPartition(RANDOM.nextInt(4)));
+        data.setTs(System.currentTimeMillis());
+        data.setUuid(UUID.randomUUID().toString());
         data.setValue(RANDOM.nextFloat() * 1000);
-
         return data;
     }
 }
