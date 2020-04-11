@@ -73,7 +73,7 @@ public class Run {
         data.setPartition(RecordBean.getPartition(RANDOM.nextInt(4)));
         data.setTs(System.currentTimeMillis());
         data.setUuid(UUID.randomUUID().toString());
-        data.setValue(RANDOM.nextFloat() * 1000);
+        data.setValue(RANDOM.nextDouble() * 100);
         return data;
     }
 }

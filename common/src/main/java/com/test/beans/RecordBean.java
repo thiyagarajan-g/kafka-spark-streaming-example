@@ -11,7 +11,7 @@ public class RecordBean implements Serializable {
     private String partition;
     private Long ts;
     private String uuid;
-    private float value;
+    private double value;
 
     public static String getTypeName(int index) {
         return index >= 0 && index <= 5 ? typeNames[index] : "";
@@ -28,7 +28,7 @@ public class RecordBean implements Serializable {
     public RecordBean() {
     }
 
-    public RecordBean(String uuid, Long ts, String type, String commodity, String partition, float value) {
+    public RecordBean(String uuid, Long ts, String type, String commodity, String partition, double value) {
         this.type = type;
         this.commodity = commodity;
         this.partition = partition;
@@ -45,11 +45,11 @@ public class RecordBean implements Serializable {
         this.type = type;
     }
 
-    public float getValue() {
+    public double getValue() {
         return this.value;
     }
 
-    public void setValue(float value) {
+    public void setValue(double value) {
         this.value = value;
     }
 
